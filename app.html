@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lotion math - calculators</title>
+<style>
+  :root { --accent: #4a2545; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Georgia, 'Times New Roman', serif; background: #f7f5f6; color: #241f24; line-height: 1.55; }
+  main { max-width: 1100px; margin: 0 auto; padding: 40px 20px 64px; }
+  h1 { font-size: 2rem; margin: 0 0 8px; color: var(--accent); }
+  .lede { margin: 0 0 28px; max-width: 640px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  section { background: #fff; border: 1px solid #e0d9df; border-radius: 8px; padding: 20px 22px; }
+  h2 { font-size: 1.15rem; margin: 0 0 6px; }
+  .hint { font-size: 0.9rem; color: #6f636e; margin: 0 0 14px; }
+  label { display: block; font-size: 0.9rem; margin: 10px 0 3px; }
+  input { width: 100%; padding: 8px 10px; font-size: 1rem; border: 1px solid #cfc4ce; border-radius: 5px; font-family: inherit; }
+  button { margin-top: 16px; width: 100%; padding: 11px; background: var(--accent); color: #fff; border: 0; border-radius: 6px; font-size: 1rem; cursor: pointer; font-family: inherit; }
+  button:hover { filter: brightness(1.12); }
+  .out { margin-top: 14px; font-size: 1rem; min-height: 1.4em; }
+  .out.err { color: #a32222; }
+  footer { max-width: 1100px; margin: 0 auto; padding: 0 20px 40px; font-size: 0.85rem; color: #877f86; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Lotion math</h1>
+  <p class="lede">Split the batch, count the jars, check the dose. Exact arithmetic, every borrowed number labeled.</p>
+  <div class="grid">
+    <section>
+      <h2>Batch split</h2>
+      <p class="hint">Percentages become exact grams.</p>
+      <label for="b-t">Batch size (g)</label>
+      <input id="b-t" type="number" value="500" min="0" step="50">
+      <label for="b-w">Water (%)</label>
+      <input id="b-w" type="number" value="70" min="0" step="1">
+      <label for="b-o">Oils (%)</label>
+      <input id="b-o" type="number" value="24" min="0" step="1">
+      <label for="b-e">Emulsifier (%)</label>
+      <input id="b-e" type="number" value="5" min="0" step="1">
+      <label for="b-p">Preservative (%)</label>
+      <input id="b-p" type="number" value="1" min="0" step="0.5">
+      <button id="b-go">Split the batch</button>
+      <div class="out" id="b-out"></div>
+    </section>
+    <section>
+      <h2>Jar plan</h2>
+      <p class="hint">Grams become milliliters and jars.</p>
+      <label for="j-t">Batch size (g)</label>
+      <input id="j-t" type="number" value="500" min="0" step="50">
+      <button id="j-go">Count the jars</button>
+      <div class="out" id="j-out"></div>
+    </section>
+    <section>
+      <h2>Preservative check</h2>
+      <p class="hint">Grams become a checked percent.</p>
+      <label for="p-t">Batch size (g)</label>
+      <input id="p-t" type="number" value="500" min="0" step="50">
+      <label for="p-g">Preservative (g)</label>
+      <input id="p-g" type="number" value="5" min="0" step="0.5">
+      <button id="p-go">Check the dose</button>
+      <div class="out" id="p-out"></div>
+    </section>
+  </div>
+</main>
+<footer>Built by the app factory. <a href="index.html">About</a> &middot; <a href="https://github.com/iLanis-agent/lotionmath">Source</a></footer>
+<script src="engine.js"></script>
+<script>
+function num(id){ return parseFloat(document.getElementById(id).value); }
+function show(id, r, render){
+  var el = document.getElementById(id);
+  if (r.error) { el.textContent = r.error; el.classList.add('err'); }
+  else { el.textContent = render(r); el.classList.remove('err'); }
+}
+document.getElementById('b-go').addEventListener('click', function(){
+  show('b-out', LotionMath.batchPlan(num('b-t'),num('b-w'),num('b-o'),num('b-e'),num('b-p')), LotionMath.renderBatch);
+});
+document.getElementById('j-go').addEventListener('click', function(){
+  show('j-out', LotionMath.jarPlan(num('j-t')), LotionMath.renderJar);
+});
+document.getElementById('p-go').addEventListener('click', function(){
+  show('p-out', LotionMath.preservCheck(num('p-t'),num('p-g')), LotionMath.renderPreserv);
+});
+</script>
+</body>
+</html>
