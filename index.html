@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lotion math - batch splits, jars and preservative checks</title>
+<style>
+  :root { --accent: #4a2545; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Georgia, 'Times New Roman', serif; background: #f7f5f6; color: #241f24; line-height: 1.55; }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 20px 64px; }
+  h1 { font-size: 2.4rem; margin: 0 0 12px; color: var(--accent); }
+  h2 { font-size: 1.25rem; margin: 40px 0 12px; }
+  p { margin: 0 0 14px; }
+  a { color: var(--accent); }
+  .cta { display: inline-block; margin: 10px 0 8px; padding: 12px 22px; background: var(--accent); color: #fff; text-decoration: none; border-radius: 6px; font-size: 1.05rem; }
+  ul { padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  .norms { background: #fff; border: 1px solid #e0d9df; border-left: 4px solid var(--accent); border-radius: 6px; padding: 14px 18px; margin-top: 12px; }
+  footer { max-width: 720px; margin: 0 auto; padding: 0 20px 40px; font-size: 0.85rem; color: #877f86; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Lotion math</h1>
+  <p>The recipe is four percentages and a prayer, the jar count is a guess, and the preservative line reads "a splash". Lotion math splits the batch into exact grams, turns grams into jars with an honest density, and checks the preservative against a labeled band. Exact arithmetic, every borrowed number labeled.</p>
+  <a class="cta" href="app.html">Open the calculators</a>
+  <h2>The three tools</h2>
+  <ul>
+    <li><strong>Batch split</strong> - batch size and phase percentages become exact grams, with the 100% check.</li>
+    <li><strong>Jar plan</strong> - batch grams become milliliters and labeled jars with the spare.</li>
+    <li><strong>Preservative check</strong> - grams in the batch become a percent checked against the labeled band.</li>
+  </ul>
+  <h2>Labeled norms</h2>
+  <div class="norms">
+    Labeled starting phases for a basic lotion: about 70% water, 24% oils, 5% emulsifier, 1% preservative. Labeled density: about 0.95 g per ml. Labeled jar size: 100 ml. Labeled preservative band: 0.5-1.5% of the batch. These are reference values, not rules - your preservative's own instructions are the authority on its dose, and water-based products grow microbes without one.
+  </div>
+</main>
+<footer>Built by the app factory. <a href="https://github.com/iLanis-agent/lotionmath">Source on GitHub</a></footer>
+</body>
+</html>
