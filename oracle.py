@@ -36,14 +36,7 @@ def jarPlan(totalG):
 def preservCheck(totalG, preservG):
     if not (totalG > 0) or not (preservG >= 0):
         return {"error": "grams must be positive"}
-    pct = r2(preservG / totalG * 100)
-    if pct < 0.5:
-        verdict = "below the labeled 0.5-1.5% band - check your recipe"
-    elif pct > 1.5:
-        verdict = "above the labeled 0.5-1.5% band - check your recipe"
-    else:
-        verdict = "inside the labeled 0.5-1.5% band"
-    return {"totalG": jsnum(float(totalG)), "preservG": jsnum(float(preservG)), "pct": jsnum(pct), "verdict": verdict}
+    return {"totalG": jsnum(float(totalG)), "preservG": jsnum(float(preservG)), "pct": jsnum(r2(preservG / totalG * 100))}
 
 def renderBatch(r):
     return ("A " + fmt(r["totalG"]) + " g batch splits into " + fmt(r["waterG"]) + " g water, " + fmt(r["oilG"]) +
@@ -54,7 +47,7 @@ def renderJar(r):
             " labeled 100 ml jar" + ("" if r["jars"] == 1 else "s") + ", " + fmt(r["spareMl"]) + " ml spare.")
 
 def renderPreserv(r):
-    return fmt(r["preservG"]) + " g in a " + fmt(r["totalG"]) + " g batch is " + fmt(r["pct"]) + "% - " + r["verdict"] + "."
+    return fmt(r["preservG"]) + " g in a " + fmt(r["totalG"]) + " g batch is " + fmt(r["pct"]) + "% - a percentage, not a verdict on the dose."
 
 CASES = []
 def add(fn, args): CASES.append({"fn": fn, "args": args})
