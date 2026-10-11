@@ -21,12 +21,7 @@
 
   function preservCheck(totalG, preservG) {
     if (!(totalG > 0) || !(preservG >= 0)) return { error: "grams must be positive" };
-    var pct = r2(preservG / totalG * 100);
-    var verdict;
-    if (pct < 0.5) verdict = "below the labeled 0.5-1.5% band - check your recipe";
-    else if (pct > 1.5) verdict = "above the labeled 0.5-1.5% band - check your recipe";
-    else verdict = "inside the labeled 0.5-1.5% band";
-    return { totalG: totalG, preservG: preservG, pct: pct, verdict: verdict };
+    return { totalG: totalG, preservG: preservG, pct: r2(preservG / totalG * 100) };
   }
 
   function renderBatch(r) {
@@ -38,7 +33,7 @@
   }
 
   function renderPreserv(r) {
-    return r.preservG + " g in a " + r.totalG + " g batch is " + r.pct + "% - " + r.verdict + ".";
+    return r.preservG + " g in a " + r.totalG + " g batch is " + r.pct + "% - a percentage, not a verdict on the dose.";
   }
 
   var api = { batchPlan: batchPlan, jarPlan: jarPlan, preservCheck: preservCheck, renderBatch: renderBatch, renderJar: renderJar, renderPreserv: renderPreserv };
