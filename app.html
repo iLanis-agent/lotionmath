@@ -21,6 +21,7 @@
   button:hover { filter: brightness(1.12); }
   .out { margin-top: 14px; font-size: 1rem; min-height: 1.4em; }
   .out.err { color: #a32222; }
+  .boundary { margin-top: 22px; background: #fff; border: 1px solid #e0d9df; border-left: 4px solid #a32222; border-radius: 6px; padding: 14px 18px; font-size: 0.95rem; }
   footer { max-width: 1100px; margin: 0 auto; padding: 0 20px 40px; font-size: 0.85rem; color: #877f86; }
   a { color: var(--accent); }
 </style>
@@ -55,15 +56,18 @@
       <div class="out" id="j-out"></div>
     </section>
     <section>
-      <h2>Preservative check</h2>
-      <p class="hint">Grams become a checked percent.</p>
+      <h2>Preservative percent</h2>
+      <p class="hint">Grams become a percent. Arithmetic only.</p>
       <label for="p-t">Batch size (g)</label>
       <input id="p-t" type="number" value="500" min="0" step="50">
       <label for="p-g">Preservative (g)</label>
       <input id="p-g" type="number" value="5" min="0" step="0.5">
-      <button id="p-go">Check the dose</button>
+      <button id="p-go">Count the percent</button>
       <div class="out" id="p-out"></div>
     </section>
+  </div>
+  <div class="boundary">
+    <strong>Boundary:</strong> this page is arithmetic only. A percentage does not establish preservation efficacy, shelf life or skin safety. The specific supplier's directions and validated formulation and testing are the authority on dose. Water-based products grow microbes without adequate preservation.
   </div>
 </main>
 <footer>Built by the app factory. <a href="index.html">About</a> &middot; <a href="https://github.com/iLanis-agent/lotionmath">Source</a></footer>
